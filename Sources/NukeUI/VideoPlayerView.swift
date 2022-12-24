@@ -32,6 +32,13 @@ public final class VideoPlayerView: _PlatformBaseView {
         }
     }
 
+    /// `true` by default. If disabled, will enable videos to play audio.
+    public var isMuted: Bool = true {
+        didSet {
+            self.player?.isMuted = isMuted
+        }
+    }
+
     /// Add if you want to do something at the end of the video
     var onVideoFinished: (() -> Void)?
 
@@ -132,7 +139,7 @@ public final class VideoPlayerView: _PlatformBaseView {
 
         let playerItem = AVPlayerItem(asset: asset)
         let player = AVQueuePlayer(playerItem: playerItem)
-        player.isMuted = true
+        player.isMuted = isMuted
         player.preventsDisplaySleepDuringVideoPlayback = false
         player.actionAtItemEnd = isLooping ? .none : .pause
         self.player = player

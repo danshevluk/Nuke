@@ -109,6 +109,12 @@ public class ImageView: _PlatformBaseView {
         }
     }
 
+    public var isVideoMuted = true {
+        didSet {
+            _videoPlayerView?.isMuted = isVideoMuted
+        }
+    }
+
     // MARK: Initializers
 
     override public init(frame: CGRect) {
@@ -179,6 +185,7 @@ public class ImageView: _PlatformBaseView {
         if isVideoRenderingEnabled, let asset = container.asset {
             videoPlayerView.isHidden = false
             videoPlayerView.isLooping = isVideoLooping
+            videoPlayerView.isMuted = isVideoMuted
             videoPlayerView.animatesFrameChanges = isVideoFrameAnimationEnabled
             videoPlayerView.asset = asset
             videoPlayerView.play()
